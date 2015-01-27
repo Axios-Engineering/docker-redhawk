@@ -5,7 +5,7 @@ The image can be pulled from the [Docker Hub Registry](https://registry.hub.dock
 
 The default command for this image runs a bash shell as the 'redhawk' user.  This is a privileged user and is not required to authenticate when running 'sudo' so that the container may be customized.
 
-	docker run -i -t axios/redhawk
+    docker run -it axios/redhawk
 
 The image comes with the omniNames and omniEvents servers installed and configured.  Start them with:
 
@@ -13,26 +13,24 @@ The image comes with the omniNames and omniEvents servers installed and configur
     sudo service omniEvents start
 
 #REDHAWK IDE support
-The REDHAWK IDE has been intentionally omitted from the yum repository this image draws from. To enable IDE support in your docker container, download the standalone IDE from sourceforge and invoke the image appropriately.
+The REDHAWK IDE has been left out of this docker image by default.  To enable IDE support in your docker container perform the following steps:
 
-If you are on an SELinux enabled CentOS 7 host, assign the appropriate context to the /tmp/.X11-unix directory as described [here]( https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Resource_Management_and_Linux_Containers_Guide/sec-Sharing_Data_Across_Containers.html):
+1.  On your localhost, disable xhost access control:
+
+        xhost +
+
+2. Run the image and bind mount the X11 socket to the container.  Additionally, set the display environment variable:
+
+        docker run -it --volume=/tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=unix$DISPLAY axios/redhawk
+
+3. Install the redhawk-ide yum package:
+
+        sudo yum install redhawk-ide
+
+4. Verify that the REDHAWK IDE can be launched from the container and displays correctly on the host system:
+
+        rhide&
+
+NOTE: If you are on an SELinux enabled CentOS 7 host, you will need to first assign the appropriate context to the /tmp/.X11-unix directory as described [here]( https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Resource_Management_and_Linux_Containers_Guide/sec-Sharing_Data_Across_Containers.html):
 
     chcon -Rt svirt_sandbox_file_t /tmp/.X11-unix
-
-Additionally, disable xhost access control:
-
-    xhost +
-
-Run the image and mount the volume to the container.  Additionally, set the display environment variable:
-
-    docker run -i -t --volume=/tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=unix$DISPLAY axios/redhawk
-
-At the shell prompt, retrieve the REDHAWK IDE from sourceforge and unpack it:
-
-    curl -L http://sourceforge.net/projects/redhawksdr/files/redhawk/1.10.1/el6/x86_64/redhawk-ide-1.10.1.R201412181632-linux.gtk.x86_64.tar.gz |tar zx
-
-Verify that the REDHAWK IDE can be launched and displays correctly on the host system:
-
-    ./eclipse/eclipse &
-
-
