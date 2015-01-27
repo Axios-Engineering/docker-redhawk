@@ -7,7 +7,7 @@ RUN yum install -y epel-release
 
 #add REDHAWK repo and install redhawk
 ADD redhawk.repo /etc/yum.repos.d/
-RUN yum install -y redhawk-devel redhawk-sdrroot-dev-mgr redhawk-sdrroot-dom-mgr redhawk-sdrroot-dom-profile redhawk-codegen redhawk-basic-components bulkioInterfaces burstioInterfaces frontendInterfaces GPP
+RUN yum install -y redhawk-devel redhawk-debuginfo redhawk-sdrroot-dev-mgr redhawk-sdrroot-dom-mgr redhawk-sdrroot-dom-profile redhawk-codegen redhawk-basic-components redhawk bulkioInterfaces burstioInterfaces frontendInterfaces GPP GPP-profile
 
 #install omniORB-utils
 RUN yum install -y omniORB-utils omniORB-servers omniEvents-server omniEvents-bootscripts
