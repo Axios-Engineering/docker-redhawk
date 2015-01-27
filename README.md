@@ -15,7 +15,7 @@ The image comes with the omniNames and omniEvents servers installed and configur
 #REDHAWK IDE support
 The REDHAWK IDE has been intentionally omitted from the yum repository this image draws from. To enable IDE support in your docker container, download the standalone IDE from sourceforge and invoke the image appropriately.
 
-If you are on an SELinux enabled host, assign the appropriate context to the /tmp/.X11-unix directory as described [here]( https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Resource_Management_and_Linux_Containers_Guide/sec-Sharing_Data_Across_Containers.html):
+If you are on an SELinux enabled CentOS 7 host, assign the appropriate context to the /tmp/.X11-unix directory as described [here]( https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Resource_Management_and_Linux_Containers_Guide/sec-Sharing_Data_Across_Containers.html):
 
     chcon -Rt svirt_sandbox_file_t /tmp/.X11-unix
 
