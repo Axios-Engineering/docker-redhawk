@@ -1,11 +1,11 @@
 # REDHAWK docker
 A basic [Docker](https://www.docker.com/) image of a [REDHAWK](http://redhawksdr.org) development environment.
 
-The image can be pulled from the [Docker Hub Registry](https://registry.hub.docker.com/u/ryanbauman/redhawk/)
+The image can be pulled from the [Docker Hub Registry](https://registry.hub.docker.com/u/axios/redhawk/)
 
 The default command for this image runs a bash shell as the 'redhawk' user.  This is a privileged user and is not required to authenticate when running 'sudo' so that the container may be customized.
 
-	docker run -i -t ryanbauman/redhawk
+	docker run -i -t axios/redhawk
 
 The image comes with the omniNames and omniEvents servers installed and configured.  Start them with:
 
@@ -25,11 +25,11 @@ Additionally, disable xhost access control:
 
 Run the image and mount the volume to the container.  Additionally, set the display environment variable:
 
-    docker run -i -t --volume=/tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=unix$DISPLAY ryanbauman/redhawk
+    docker run -i -t --volume=/tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=unix$DISPLAY axios/redhawk
 
 At the shell prompt, retrieve the REDHAWK IDE from sourceforge and unpack it:
 
-    curl -L http://sourceforge.net/projects/redhawksdr/files/redhawk/1.10.0/el6/x86_64/redhawk-ide-1.10.0.R201407290010-linux.gtk.x86_64.tar.gz |tar zx
+    curl -L http://sourceforge.net/projects/redhawksdr/files/redhawk/1.10.1/el6/x86_64/redhawk-ide-1.10.1.R201412181632-linux.gtk.x86_64.tar.gz |tar zx
 
 Verify that the REDHAWK IDE can be launched and displays correctly on the host system:
 

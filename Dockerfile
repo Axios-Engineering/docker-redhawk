@@ -1,8 +1,9 @@
 from centos:centos6
-MAINTAINER Ryan Bauman <ryanbauman@gmail.com>
+MAINTAINER Ryan Bauman <ryan.bauman@axiosengineering.com>
 
-#add EPEL repo 
-RUN yum install -y http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+#add EPEL repo
+RUN yum clean all
+RUN yum install -y epel-release
 
 #add REDHAWK repo and install redhawk
 ADD redhawk.repo /etc/yum.repos.d/
